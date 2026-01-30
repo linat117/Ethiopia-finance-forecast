@@ -38,7 +38,7 @@ def validate_schema(df):
         if subset.empty:
             continue
 
-        missing = required_cols - set(subset.columns)
+        missing = required_cols - set(df.columns)
         if missing:
             errors.append(
                 f"{record_type}: missing columns {missing}"
@@ -48,3 +48,10 @@ def validate_schema(df):
         raise ValueError("Schema validation failed:\n" + "\n".join(errors))
 
     return True
+
+def record_type_counts(df):
+    return df["record_type"].value_counts()
+
+
+def unique_indicators(df):
+    return df.loc[df["record_type"] == "observation", "indicator_code"].unique()
