@@ -1,0 +1,37 @@
+import pandas as pd
+from pathlib import Path
+
+def load_unified_dataset(file_path: str) -> pd.DataFrame:
+    """
+    Load unified Ethiopia FI dataset from Excel or CSV.
+    Handles multi-sheet Excel files.
+    """
+    path = Path(file_path)
+
+    if path.suffix == ".xlsx":
+        xls = pd.ExcelFile(path)
+        sheets = xls.sheet_names
+
+        data_frames = []
+        for sheet in sheets:
+            df = pd.read_excel(path, sheet_name=sheet)
+            data_frames.append(df)
+
+        return pd.concat(data_frames, ignore_index=True)
+
+    elif path.suffix == ".csv":
+        return pd.read_csv(path)
+
+    else:
+        raise ValueError("Unsupported file format")
+
+
+def load_reference_codes(file_path: str) -> pd.DataFrame:
+    path = Path(file_path)
+
+    if path.suffix == ".xlsx":
+        return pd.read_excel(path)
+    elif path.suffix == ".csv":
+        return pd.read_csv(path)
+    else:
+        raise ValueError("Unsupported reference file format")
