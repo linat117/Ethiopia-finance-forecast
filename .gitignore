@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Data (keep raw data, ignore derived files if large)
+data/processed/*.csv
+data/processed/*.xlsx
+data/processed/*.parquet
+
+# Logs
+*.log
+
+# Streamlit cache
+.streamlit/
+
+# Test artifacts
+.coverage
+htmlcov/
+
+# Environment variables
+.env.local
+.env.production
