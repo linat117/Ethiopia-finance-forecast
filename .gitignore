@@ -23,6 +23,7 @@ Thumbs.db
 .idea/
 
 # Data (keep raw data, ignore derived files if large)
+data/processed
 data/processed/*.csv
 data/processed/*.xlsx
 data/processed/*.parquet
