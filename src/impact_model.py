@@ -77,7 +77,10 @@ def apply_event_impacts_over_time(indicator_df, impact_links, duration_months=36
         impact_col = "impact_pp"
 
     monthly_effect = links.groupby(["period_start", "lag_months"])[impact_col].sum().reset_index()
-    monthly_effect["effect_start"] = monthly_effect["period_start"] + pd.to_timedelta(monthly_effect["lag_months"].astype(int), unit="M")
+    monthly_effect["effect_start"] = monthly_effect.apply(
+        lambda r: r["period_start"] + pd.DateOffset(months=int(r["lag_months"])) if pd.notna(r["period_start"]) else pd.NaT,
+        axis=1,
+    )
 
     def cumulative_impact(obs_date):
         total = 0.0
